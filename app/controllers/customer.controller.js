@@ -53,6 +53,24 @@ let findall = (req, res) => {
 		});
 };
 
+let findbyid = (req, res) => {
+	const id = req.params.id;
+	Customer.findById(id)
+		.then((customer) => {
+			if (!customer) {
+				return res.status(404).json({
+					ok: false,
+					err: `The customer with ID ${id} doesn't exists`,
+				});
+			}
+
+			res.json({ customer });
+		})
+		.catch((err) => {
+			res.status(500).json({ ok: false, error: err });
+		});
+};
+
 let update = (req, res) => {
 	const id = req.params.id;
 	const body = req.body;
@@ -84,4 +102,4 @@ let update = (req, res) => {
 		});
 };
 
-module.exports = { create, findall, deleteById, update };
+module.exports = { create, findall, findbyid, deleteById, update };

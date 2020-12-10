@@ -5,10 +5,12 @@ require('./config/mongodb.config');
 // EXPRESS
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 const bodyparser = require('body-parser');
 
 app.use(bodyparser.json({ extended: false }));
+app.use(cors());
 app.use(require('./routes/index.router'));
 
 // MONGOOSE

@@ -9,27 +9,18 @@ const {
 } = require('../middlewares/authentication.middleware');
 
 // Create a new Customer
-app.post(
-	'/api/customer/create',
-	[verifyToken, verifyAdminRole],
-	customers.create
-);
+app.post('/api/customer/create', customers.create);
 
 // Retrieve all Customer
-app.get('/api/customer/retrieveinfos', verifyToken, customers.findall);
+app.get('/api/customer/retrieveinfos', customers.findall);
+
+// Get customer by ID
+app.get('/api/customer/:id', customers.findbyid);
 
 // Update a Customer with Id
-app.put(
-	'/api/customer/updatebyid/:id',
-	[verifyToken, verifyAdminRole],
-	customers.update
-);
+app.put('/api/customer/updatebyid/:id', customers.update);
 
 // Delete a Customer with Id
-app.delete(
-	'/api/customer/deletebyid/:id',
-	[verifyToken, verifyAdminRole],
-	customers.deleteById
-);
+app.delete('/api/customer/deletebyid/:id', customers.deleteById);
 
 module.exports = app;
